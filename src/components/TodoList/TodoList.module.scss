@@ -38,6 +38,10 @@
         height: 150px;
    }
 
+    .todoList__header_AddNew {
+        display: flex;
+        flex-direction: column;
+    }
 
 
 }

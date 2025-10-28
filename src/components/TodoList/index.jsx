@@ -28,13 +28,24 @@ const TodoList = () => {
                 <div className={style.todoList_headerArea}>
                 {   addNote 
                     ? <NoteForm onCancel={setAddNote} onChange={setNotesListEdited}/>
-                    : <button className={style.todoList__btn_add} onClick={() => setAddNote(!addNote)}>+ Aggiungi</button>
+                    : <div className={style.todoList__header_AddNew}>
+                            <p className={style.todoList__header}>Clicca su "Aggiungi" se hai una nuova nota 😁</p>
+                            <button className={style.todoList__btn_add} onClick={() => setAddNote(!addNote)}>+ Aggiungi</button>
+                        </div>
+                    
                 }
                 </div>
-                <p className={style.todoList__header}>Ecco la tua to-do list:</p>
-                <div className={style.todoList__items}>
-                    {notes.map((item, index) => <ListItem key={index} content={item} onChange={setNotesListEdited}/>)} 
-                </div>
+
+                {
+                    notes.length > 0
+                    ? <>
+                        <p className={style.todoList__header}>Ecco la tua to-do list:</p>
+                        <div className={style.todoList__items}>
+                            {notes.map((item, index) => <ListItem key={index} content={item} onChange={setNotesListEdited}/>)} 
+                        </div>
+                    </>
+                    : <p className={style.todoList__header}>La tua To-do 📝 List è vuota! Sembra che tu non abbia altri task da fare! 🥳</p> 
+                }     
             </div>  
         </>
     );
