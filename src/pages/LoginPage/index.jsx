@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import "../LoginPage/style.css"
 // TODO: come rendere il pulsante stessa larghezza
 
 
 const LoginPage = ({onLoginEvent}) => {
+    const navigate = useNavigate()
+
     const [ usernameInput, setUsernameInput ] = useState("");
     const [ passwordInput, setPasswordInput ] = useState("");
     const [ userData, setUserData ] = useState({});
@@ -27,9 +30,10 @@ const LoginPage = ({onLoginEvent}) => {
             name: usernameInput,
             password: passwordInput
         });
-        console.log("USER DATA - NAME: " + usernameInput)
-        console.log("USER DATA - PASSWORD: " + passwordInput)
-        onLoginEvent(userData.name);
+
+        onLoginEvent(usernameInput);
+        navigate('/home')
+
     }
 
     return (

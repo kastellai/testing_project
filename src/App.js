@@ -8,15 +8,14 @@ import { useState } from 'react';
 function App() {
 
   const [ userName, setUserName ] = useState("")
-  const handleClick = (newName) => {setUserName(newName);}
-
+  const handleClick = (newName) => setUserName(newName);
+  
   return (
-    
      <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage onLoginEvent={handleClick}/>} />
         { userName === "" 
           ? <Route path="/login" element={<LoginPage onLoginEvent={handleClick}/>}/>
-          : <Route path="/home" element={<HomePage />} />}
+          : <Route path="/home" element={<HomePage userName={userName}/>} />}
 
              
          {/* <Route path="/home" element={<HomePage />} />
