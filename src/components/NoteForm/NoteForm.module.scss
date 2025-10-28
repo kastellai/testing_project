@@ -1,0 +1,28 @@
+
+.formWrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    min-width: 200px;
+    max-width: 800px;
+    // margin: 50px;
+    gap: 4px;
+
+    .formButtons {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    textarea {
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    button {
+        width: 20%;
+        padding: 8px;
+        border-radius: 12px;
+        border: none;
+    }
+}
