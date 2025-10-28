@@ -1,17 +1,23 @@
 import style from "./ListItem.module.scss"
-import { deleteDataNotes, putDataNotes } from "./../../libs/notes";
-import { useState } from "react";
+import { deleteDataNotesJson, putDataNotes, putDataNotesJson } from "./../../libs/notes";
+import { useState, useEffect } from "react";
 
 
-const ListItem = ({content, onChange}) => {
-
+const ListItem = ({content, imgUrl, onChange}) => {
     const [ editNote, setEditNote ] = useState(false);
     const [ newNote, setNewNote ] = useState("");
+    const [ newImageUrl, setNewImageUrl ] = useState("");
+
+    const [ newNoteJson, setNewNoteJson ] = useState("");
+
 
     const handlerNewNoteInput = (event) => setNewNote(event.target.value);
+    const handlerNewImageUrlInput = (event) => setNewImageUrl(event.target.value);
 
     const handlerOnDelete = (note) => {
-        deleteDataNotes(note)
+        // deleteDataNotes(note)
+        deleteDataNotesJson(note)
+
         onChange(true);
         setEditNote(false);
         alert("Eliminato!");
@@ -21,6 +27,7 @@ const ListItem = ({content, onChange}) => {
     const handlerOnEditing = () => {
         setEditNote(!editNote);
         setNewNote(content)
+        setNewImageUrl(imgUrl)
     }
 
     const handlerOnCancelEditing = () => {
@@ -28,22 +35,34 @@ const ListItem = ({content, onChange}) => {
     }
 
     const handlerOnSaveEditing = (oldNote) => {
-        putDataNotes(oldNote, newNote)
+        // putDataNotes(oldNote, newNote)
+        putDataNotesJson(oldNote, newNoteJson)
         onChange(true);
         setEditNote(false);
         alert("Nota aggiornata!");
     }
 
+    useEffect(() => {
+            setNewNoteJson({
+                content: newNote,
+                img: newImageUrl,
+                date: new Date(),
+            });
+        }, [newNote, newImageUrl]);
 
     return (
         <li className={style.listItem__wrapper}>
         
         { editNote 
             ? <form className={style.listItem__text}>
+                    <input value={newImageUrl} onChange={handlerNewImageUrlInput} required placeholder="Image url"></input>
                     <textarea value={newNote} onChange={handlerNewNoteInput} rows="5" cols="30" required ></textarea>
                 </form>
             
-            : <div className={style.listItem__text}>{content}</div>
+            : <div className={style.listItem__contentImg}>
+                    <img src={imgUrl} />
+                    <div className={style.listItem__text}>{content}</div>
+                </div>
         }
 
                 <div className={style.listItem__buttons}>

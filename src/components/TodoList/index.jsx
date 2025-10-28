@@ -3,23 +3,23 @@ import ListItem from "./../ListItem"
 import NoteForm from "./../NoteForm"
 
 import style from "./TodoList.module.scss"
-import { getDataNotes } from "./../../libs/notes"
+import { getDataNotes, getDataNotesJson } from "./../../libs/notes"
 
 const TodoList = () => {
 
     const [ addNote, setAddNote ] = useState(false);
     const [ notesListEdited, setNotesListEdited ] = useState(false);
 
-    const [ notes, setNotes ] = useState([]);
+    const [ notes, setNotes ] = useState({});
     
     useEffect(() => {
-        setNotes(getDataNotes().toReversed());
+        // setNotes(getDataNotes().toReversed());
+        setNotes(getDataNotesJson().toReversed());
     }, [notesListEdited])
 
     useEffect(() => {
         setNotesListEdited(false);
     }, [notes])
-
 
 
     return(
@@ -41,7 +41,7 @@ const TodoList = () => {
                     ? <>
                         <p className={style.todoList__header}>Ecco la tua to-do list:</p>
                         <div className={style.todoList__items}>
-                            {notes.map((item, index) => <ListItem key={index} content={item} onChange={setNotesListEdited}/>)} 
+                            {notes.map((item, index) => <ListItem key={index} content={item.content} imgUrl={item.img} onChange={setNotesListEdited}/>)} 
                         </div>
                     </>
                     : <p className={style.todoList__header}>La tua To-do 📝 List è vuota! Sembra che tu non abbia altri task da fare! 🥳</p> 

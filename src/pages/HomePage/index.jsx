@@ -1,12 +1,29 @@
+import { useEffect, useState } from "react";
 import TodoList from "./../../components/TodoList"
 import style from "./HomePage.module.scss"
 
-const HomePage = ({userName}) => {
+const HomePage = ({ onLogOut }) => {
+    const [ loggedStatus, setLoggedStatus ] = useState({});
+
+    useEffect(() => {
+        setLoggedStatus({
+            loggedStatus: localStorage.getItem('access_token'),
+            username : localStorage.getItem('username'),
+        });
+    }, []);
     return (
-        <div>
-            <h1 className={style.homeTitle}>Welcome {userName} 👋</h1>
-            <TodoList />
-        </div>
+        <>
+        {loggedStatus.username 
+        ? <div className={style.home__wrapper}>
+                <h1 className={style.homeTitle}>Welcome {loggedStatus.username} 👋</h1>
+                <button className={style.home__logout_btn} onClick={onLogOut}>LogOut</button>
+                <TodoList />
+            </div>
+        : <div className={style.home__wrapper}>
+                <h1 className={style.homeTitle}>⛔ Non autorizzato ⛔</h1>
+            </div>
+        }
+        </>
     );
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { isUserAllowed } from "./../../libs/user";
 import style from "./LoginPage.module.scss"
 // TODO: come rendere il pulsante stessa larghezza
 
@@ -27,12 +28,16 @@ const LoginPage = ({onLoginEvent}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setUserData({
-            name: usernameInput,
+            username: usernameInput,
             password: passwordInput
         });
 
-        onLoginEvent(usernameInput);
-        navigate('/home')
+        isUserAllowed(userData)
+
+        if (localStorage.getItem('access_token') === "ALLOWED") {
+            onLoginEvent(usernameInput);
+            navigate('/home')
+        }
 
     }
 
