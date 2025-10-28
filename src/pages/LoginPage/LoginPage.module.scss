@@ -21,28 +21,31 @@ body {
     align-items: center;
     justify-content: center;
     gap: 16px;
+
+    p {
+        color: rebeccapurple;
+        font-weight: 900;
+        font-size: 46px;
+    }
+
+    input {
+        width: 250px;
+        padding: 16px 12px;
+        border-radius: 16px;
+        border: 1px solid rgba(102, 51, 153, 0.383); 
+        &:hover {
+            border: 1px solid purple;
+        }
+    }
+
+    button {
+        width: 250px;
+        padding: 16px 12px;
+        border-radius: 16px;
+        margin-top: 16px;
+        background-color: rebeccapurple;
+        color: white;
+        font-weight: 700;
+    }   
 }
 
-.loginForm > p {
-    color: rebeccapurple;
-    font-weight: 900;
-    font-size: 46px;
-}
-
-.loginForm > input {
-    width: 250px;
-    padding: 16px 12px;
-    border-radius: 16px;
-    border: 1px solid rgba(102, 51, 153, 0.383);
-}
-
-.loginFormButton {
-    margin-top: 16px;
-    background-color: rebeccapurple;
-    color: white;
-    font-weight: 700;
-}
-
-input:hover {
-   border: 1px solid purple;
-}
