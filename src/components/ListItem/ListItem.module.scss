@@ -30,26 +30,30 @@
         flex-wrap: wrap;
         flex-direction: row;
         justify-content: space-evenly;
+
+        button {
+            border-radius: 8px;
+            border: 1px solid white;
+            padding: 8px;
+            width: 20%;
+        }
+
+        .listItem__btn_done {
+            background-color: rgb(188, 253, 188);
+        }
+
+        .listItem__btn_edit {
+            background-color: rgb(223, 223, 223);
+        }
+
+        .listItem__btn_delete {
+            background-color: rgb(244, 179, 179);
+        }
     }
     
-    button {
-        border-radius: 8px;
-        border: 1px solid white;
-        padding: 8px;
-        width: 20%;
-    }
+   
 
-    .listItem__btn_done {
-        background-color: rgb(188, 253, 188);
-    }
-
-    .listItem__btn_edit {
-        background-color: rgb(223, 223, 223);
-    }
-
-    .listItem__btn_delete {
-        background-color: rgb(244, 179, 179);
-    }
+   
 }
 
 
