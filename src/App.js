@@ -15,8 +15,8 @@ function App() {
      <Routes>
         <Route path="/" element={<LoginPage />} />
         { userName === "" 
-          ? <Route path="/home" element={<HomePage />} />
-          : <Route path="/login" element={<LoginPage onLoginEvent={handleClick}/>} />}
+          ? <Route path="/login" element={<LoginPage onLoginEvent={handleClick}/>}/>
+          : <Route path="/home" element={<HomePage />} />}
 
              
          {/* <Route path="/home" element={<HomePage />} />

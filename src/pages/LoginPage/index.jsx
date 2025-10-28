@@ -27,8 +27,8 @@ const LoginPage = ({onLoginEvent}) => {
             name: usernameInput,
             password: passwordInput
         });
-        console.log("USER DATA - NAME: " + userData.name)
-        console.log("USER DATA - PASSWORD: " + userData.name)
+        console.log("USER DATA - NAME: " + usernameInput)
+        console.log("USER DATA - PASSWORD: " + passwordInput)
         onLoginEvent(userData.name);
     }
 
