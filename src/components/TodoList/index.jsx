@@ -41,7 +41,7 @@ const TodoList = () => {
                     ? <>
                         <p className={style.todoList__header}>Ecco la tua to-do list:</p>
                         <div className={style.todoList__items}>
-                            {notes.map((item, index) => <ListItem key={index} content={item.content} imgUrl={item.img} onChange={setNotesListEdited}/>)} 
+                            {notes.map((item, index) => <ListItem key={index} content={item.content} imgUrl={item.img} date={item.date} onChange={setNotesListEdited}/>)} 
                         </div>
                     </>
                     : <p className={style.todoList__header}>La tua To-do 📝 List è vuota! Sembra che tu non abbia altri task da fare! 🥳</p> 

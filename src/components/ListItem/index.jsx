@@ -3,7 +3,7 @@ import { deleteDataNotesJson, putDataNotes, putDataNotesJson } from "./../../lib
 import { useState, useEffect } from "react";
 
 
-const ListItem = ({content, imgUrl, onChange}) => {
+const ListItem = ({content, imgUrl, date, onChange}) => {
     const [ editNote, setEditNote ] = useState(false);
     const [ newNote, setNewNote ] = useState("");
     const [ newImageUrl, setNewImageUrl ] = useState("");
@@ -61,6 +61,7 @@ const ListItem = ({content, imgUrl, onChange}) => {
             
             : <div className={style.listItem__contentImg}>
                     <img src={imgUrl} />
+                    <div className={style.listItem__text}>{date.toLocaleDateString()}</div>
                     <div className={style.listItem__text}>{content}</div>
                 </div>
         }

@@ -25,11 +25,10 @@ function App() {
   }
 
   return (
-     <Routes>
-        <Route path="/" element={<LoginPage onLoginEvent={handleClick}/>} />
-        { loggedStatus 
-          ? <Route path="/home" element={<HomePage onLogOut={onLogOut}/>} />
-          : <Route path="/login" element={<LoginPage onLoginEvent={handleClick}/>}/>}
+     <Routes> 
+        { !loggedStatus 
+        ? <Route path="/" element={<LoginPage onLoginEvent={handleClick}/>} />
+        : loggedStatus && <Route path="/home" element={<HomePage onLogOut={onLogOut}/>} />}
       </Routes>
 
   );

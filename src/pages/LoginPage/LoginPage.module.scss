@@ -47,5 +47,15 @@ body {
         color: white;
         font-weight: 700;
     }   
+
+    .loginForm__errorBanner {
+        background-color: rgb(244, 179, 179);
+        border-radius: 8px;
+        border: 1px solid white;
+        padding: 8px;
+        width: 250px;
+        color: darkred;
+        text-align: center;
+    }
 }
 

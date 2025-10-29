@@ -12,6 +12,8 @@ const LoginPage = ({onLoginEvent}) => {
     const [ passwordInput, setPasswordInput ] = useState("");
     const [ userData, setUserData ] = useState({});
 
+    const [ showErrorBanner, setShowErrorBanner ] = useState(false);
+
     const handlerUsernameInput = (event) => {
         setUsernameInput(event.target.value)
     }
@@ -21,6 +23,7 @@ const LoginPage = ({onLoginEvent}) => {
     }
 
     useEffect(() => {
+        setShowErrorBanner(false);
         setUserData({username: usernameInput, password: passwordInput});
     }, [usernameInput, passwordInput])
 
@@ -37,6 +40,8 @@ const LoginPage = ({onLoginEvent}) => {
         if (localStorage.getItem('access_token') === "ALLOWED") {
             onLoginEvent(usernameInput);
             navigate('/home')
+        } else {
+            setShowErrorBanner(true);
         }
 
     }
@@ -47,6 +52,8 @@ const LoginPage = ({onLoginEvent}) => {
             <input value={usernameInput} onChange={handlerUsernameInput} type="text" placeholder="Username" required autoComplete="false"></input>
             <input value={passwordInput} onChange={handlerPasswordInput} type="password" placeholder="Password" required autoComplete="false"></input>
             <button onClick={handleSubmit} type="submit">LOGIN</button>
+            {showErrorBanner && <div className={style.loginForm__errorBanner}>Errore durante il login.
+            Riprova ad inserire username e password.</div>}
         </form>
     );
 }
