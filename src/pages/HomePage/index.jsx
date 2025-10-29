@@ -8,13 +8,14 @@ const HomePage = ({ onLogOut }) => {
 
     useEffect(() => {
         setLoggedStatus({
-            loggedStatus: localStorage.getItem('access_token'),
+            token: localStorage.getItem('access_token'),
             username : localStorage.getItem('username'),
         });
     }, []);
+    
     return (
         <>
-        {loggedStatus.username 
+        {loggedStatus.token 
         ? <div className={style.home__wrapper}>
                 <h1 className={style.homeTitle}>Welcome {loggedStatus.username} 👋</h1>
                 <button className={style.home__logout_btn} onClick={onLogOut}>LogOut</button>

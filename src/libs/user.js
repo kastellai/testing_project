@@ -1,3 +1,4 @@
+// --LOGIN/LOGOUT---NO SERVER INTEGRATION--------------------------------------------------
 
 const Users = [
     {
@@ -10,7 +11,6 @@ const Users = [
     },
 ]
 
-// array di oggetti json
 const isUserAllowed = (user) => { 
     Users.forEach((element) => {
         if (element.username === user.username) {
@@ -26,9 +26,45 @@ const isUserAllowed = (user) => {
         }
     });
 }
-
-const logOut = () => {
+const logOutDB = () => {
      localStorage.clear()
 }
+// ---------------------------------------------------------------------
 
-export { isUserAllowed, logOut }
+
+
+// --LOGIN/LOGOUT---SERVER INTEGRATION--------------------------------------------------
+
+const BASE_URL = "http://localhost:4000";
+const END_POINT_LOGIN = "/users/login";
+const END_POINT_LOGOUT = "/users/logout";
+
+const isUserAllowedPOST = (user) => fetch(BASE_URL + END_POINT_LOGIN,
+    {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify(user),
+    }).then((response) => {   
+            return {
+                statusCode: response.status,
+                body:  response.json(),
+            }
+    });
+
+    
+const logOut = (userAccessToken) => fetch(BASE_URL + END_POINT_LOGOUT,
+    {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json"
+        },
+        body: JSON.stringify({
+            token: userAccessToken
+        }),
+    }).then((response) => response.status);
+
+
+export { isUserAllowed, logOutDB,
+        isUserAllowedPOST, logOut,  }

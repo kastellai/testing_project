@@ -14,7 +14,11 @@ const TodoList = () => {
     
     useEffect(() => {
         // setNotes(getDataNotes().toReversed());
-        setNotes(getDataNotesJson().toReversed());
+        // without server
+        // setNotes(getDataNotesJson().toReversed());
+        
+        // with server
+        getDataNotesJson().then((data) => setNotes(data.toReversed()))
     }, [notesListEdited])
 
     useEffect(() => {
@@ -41,7 +45,7 @@ const TodoList = () => {
                     ? <>
                         <p className={style.todoList__header}>Ecco la tua to-do list:</p>
                         <div className={style.todoList__items}>
-                            {notes.map((item, index) => <ListItem key={index} content={item.content} imgUrl={item.img} date={item.date} onChange={setNotesListEdited}/>)} 
+                            {notes.map((item, index) => <ListItem key={index} note={item} onChange={setNotesListEdited}/>)} 
                         </div>
                     </>
                     : <p className={style.todoList__header}>La tua To-do 📝 List è vuota! Sembra che tu non abbia altri task da fare! 🥳</p> 

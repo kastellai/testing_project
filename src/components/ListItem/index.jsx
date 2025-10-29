@@ -3,7 +3,7 @@ import { deleteDataNotesJson, putDataNotes, putDataNotesJson } from "./../../lib
 import { useState, useEffect } from "react";
 
 
-const ListItem = ({content, imgUrl, date, onChange}) => {
+const ListItem = ({note, onChange}) => {
     const [ editNote, setEditNote ] = useState(false);
     const [ newNote, setNewNote ] = useState("");
     const [ newImageUrl, setNewImageUrl ] = useState("");
@@ -26,17 +26,22 @@ const ListItem = ({content, imgUrl, date, onChange}) => {
 
     const handlerOnEditing = () => {
         setEditNote(!editNote);
-        setNewNote(content)
-        setNewImageUrl(imgUrl)
+        setNewNote(note.content)
+        setNewImageUrl(note.img)
     }
 
     const handlerOnCancelEditing = () => {
         setEditNote(false);
     }
 
-    const handlerOnSaveEditing = (oldNote) => {
+    const handlerOnSaveEditing = () => {
         // putDataNotes(oldNote, newNote)
-        putDataNotesJson(oldNote, newNoteJson)
+        // without server
+        // putDataNotesJson(oldNote, newNoteJson)
+        
+        // with server
+        putDataNotesJson(newNoteJson)
+        
         onChange(true);
         setEditNote(false);
         alert("Nota aggiornata!");
@@ -44,6 +49,7 @@ const ListItem = ({content, imgUrl, date, onChange}) => {
 
     useEffect(() => {
             setNewNoteJson({
+                id: note.id,
                 content: newNote,
                 img: newImageUrl,
                 date: new Date(),
@@ -60,21 +66,22 @@ const ListItem = ({content, imgUrl, date, onChange}) => {
                 </form>
             
             : <div className={style.listItem__contentImg}>
-                    <img src={imgUrl} />
-                    <div className={style.listItem__text}>{date.toLocaleDateString()}</div>
-                    <div className={style.listItem__text}>{content}</div>
+                    <img src={note.img} />
+                    <div className={style.listItem__text}>{note.date}</div>
+                    {/* <div className={style.listItem__text}>{date.toLocaleDateString()}</div> */}
+                    <div className={style.listItem__text}>{note.content}</div>
                 </div>
         }
 
                 <div className={style.listItem__buttons}>
-                {editNote && <button onClick={() => handlerOnSaveEditing(content)} className={style.listItem__btn_done}>Done</button>}
+                {editNote && <button onClick={handlerOnSaveEditing} className={style.listItem__btn_done}>Done</button>}
 
                 {editNote 
                     ? <button onClick={handlerOnCancelEditing} className={style.listItem__btn_edit}>Cancel</button>
                     : <button onClick={handlerOnEditing} className={style.listItem__btn_edit}>Edit</button>
                 }
                 
-                <button onClick={() => handlerOnDelete(content)} className={style.listItem__btn_delete}>Elimina</button>     
+                <button onClick={() => handlerOnDelete(note)} className={style.listItem__btn_delete}>Elimina</button>     
             </div>   
 
         </li>
